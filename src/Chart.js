@@ -1,7 +1,7 @@
-import ReactHighcharts from 'react-highcharts';
+import SafeChart from './SafeChart';
 
 function Chart({ config }) {
-  return <ReactHighcharts config={config} />;
+  return <SafeChart config={config} />;
 }
 
 export default Chart;
