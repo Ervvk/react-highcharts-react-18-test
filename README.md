@@ -7,13 +7,15 @@ This project tests the compatibility of the old `react-highcharts` library (vers
 React-highcharts library doesn't handle React 18's double-mounting behavior in development mode, which causes chart destruction errors.
 It was fixed with the custom wrapper:
 
-1. Mount → Creates a chart
-2. Unmount (Strict Mode) → Destroys the chart 
-3. Mount again → Attempts to destroy an already destroyed chart - Error
+Mount → Creates a chart
+Unmount (Strict Mode) → Destroys the chart 
+Mount again → Attempts to destroy an already destroyed chart - Error
 
-1. Mount → Creates a chart, chartRef = chart
-2. Unmount (Strict Mode) → Safely destroys, chartRef = null
-3. Mount again → if (!chartRef.current) = true, creates a new chart - Good
+##
+
+Mount → Creates a chart, chartRef = chart
+Unmount (Strict Mode) → Safely destroys, chartRef = null
+Mount again → if (!chartRef.current) = true, creates a new chart - Good
 
 ## Dependencies
 
