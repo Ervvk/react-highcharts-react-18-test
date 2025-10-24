@@ -2,9 +2,18 @@
 
 This project tests the compatibility of the old `react-highcharts` library (version 16.1.0) with React 18.
 
-## Purpose
 
-To verify whether the legacy `react-highcharts@16.1.0` library works correctly with React 18.3.1.
+## Important Note
+React-highcharts library doesn't handle React 18's double-mounting behavior in development mode, which causes chart destruction errors.
+It was fixed with the custom wrapper:
+
+1. Mount → Creates a chart
+2. Unmount (Strict Mode) → Destroys the chart 
+3. Mount again → Attempts to destroy an already destroyed chart - Error
+
+1. Mount → Creates a chart, chartRef = chart
+2. Unmount (Strict Mode) → Safely destroys, chartRef = null
+3. Mount again → if (!chartRef.current) = true, creates a new chart - Good
 
 ## Dependencies
 
@@ -32,10 +41,6 @@ npm start
 ```
 
 Opens the app in development mode at [http://localhost:3000](http://localhost:3000).
-
-## Important Note
-
-React.StrictMode has been disabled in this project because the old react-highcharts library doesn't handle React 18's double-mounting behavior in development mode, which causes chart destruction errors.
 
 ## Build
 
